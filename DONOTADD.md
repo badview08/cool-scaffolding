@@ -22,3 +22,5 @@ loag a list of messages from the server
 display a list of messages from the server
 implement firm to creat a new message
 fetch new messages every 30 secs and display fetched messages.
+
+tiny-lasagna-server.herokuapp.com/collections/messages/
