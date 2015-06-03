@@ -6,16 +6,16 @@
     
     route();
     
-    $('.login-form').on('submit', 'login-form', function(event){
+    $(document).on('submit', '.login-form', function(event){
       event.preventDefault();
-      console.log($(this).find('.login-user-name'));
+      username = ($(this).find('.login-form-username').val());
       window.location.hash = '/chat';
     });
     
-    $(window).on('hashchange'), function(event){
+    $(window).on('hashchange', function(event){
       event.preventDefault();
-      console.log(window.location.hash);
-    };
+      route();
+    });
     $(window).on('hashchange', function(event){
       event.preventDefault();
       route();
@@ -28,12 +28,20 @@
         $('.application').html(JST['login']());
         break;
       case '#/chat':
-        $('.application').htmls(JST['chat']());
+        renderChat()
+        //$('.application').htmls(JST['chat']());
         break;
     };
-    function renderChat() {
+    }
+    function renderChat(){
       $('.application').html(JST['chat']());
       console.log('username: ', username);
-    };
-    };
+   };
+   var messages = [
+     {
+       username:"Jake",
+       created_at: new Date(),
+       content:Math.random()
+     }
+   ]
 })();
