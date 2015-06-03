@@ -44,4 +44,32 @@
        content:Math.random()
      }
    ]
+   $.ajax({
+     url: "http://tiny-lasagna-server.herokuapp.com/collections/messages/",
+     type:"POST",
+     data: {
+       username: 'Gabe',
+       created_at: new Date(),
+       content: "Hello"
+     }
+   })
+   function deleteInvalidMessages(){
+  $.ajax({
+    url: "http://tiny-lasagna-server.herokuapp.com/collections/messages/"
+  }).then(function(messages) {
+    console.log(messages);
+    var invalid = _.reject(messages, function(message) {
+      return message.hasOwnProperty('username')
+          && message.hasOwnProperty('created_at')
+          && message.hasOwnProperty('content')
+    });
+    console.log(invalid);
+    invalid.forEach(function(message) {
+      $.ajax({
+        url: "http://tiny-lasagna-server.herokuapp.com/collections/messages/" + message._id,
+        type: "DELETE"
+      })
+    });
+  });
+} 
 })();
